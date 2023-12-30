@@ -30,9 +30,12 @@ namespace Persistence.Context
                 switch (entry.State)
                 {
                     case EntityState.Added:
+                        entry.Entity.CreatedBy = "Usuario ejemplo";
+                        entry.Entity.LastModifiedBy = "Inicial";
                         entry.Entity.CreatedAt = DateTime.UtcNow;
                         break;
                     case EntityState.Modified:
+                        entry.Entity.LastModifiedBy = "Usuario ejemplo";
                         entry.Entity.LastModifiedAt = DateTime.UtcNow;
                         break;
                 }

@@ -1,10 +1,8 @@
-﻿using Application.Wrappers;
+﻿using Application.Interfaces;
+using Application.Wrappers;
+using AutoMapper;
+using Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.Departments.Commands.CreateDepartmentCommand
 {
@@ -16,9 +14,21 @@ namespace Application.Features.Departments.Commands.CreateDepartmentCommand
 
     public class CreateDepartmentCommandHandler : IRequestHandler<CreateDepartmentCommand, Response<int>>
     {
-        public Task<Response<int>> Handle(CreateDepartmentCommand request, CancellationToken cancellationToken)
+        private readonly IRepositoryAsync<Department> _repositoryAsync;
+        private readonly IMapper _mapper;
+
+        public CreateDepartmentCommandHandler(IRepositoryAsync<Department> repositoryAsync, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _repositoryAsync = repositoryAsync;
+            _mapper = mapper;
+        }
+        public async Task<Response<int>> Handle(CreateDepartmentCommand request, CancellationToken cancellationToken)
+        {
+            var nuevoDepartment = _mapper.Map<Department>(request);
+
+            var data = await _repositoryAsync.AddAsync(nuevoDepartment);
+
+            return new Response<int>(data.Id);
         }
     }
 }
