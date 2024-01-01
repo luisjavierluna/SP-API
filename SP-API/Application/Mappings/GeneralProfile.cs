@@ -1,4 +1,5 @@
-﻿using Application.Features.Departments.Commands.CreateDepartmentCommand;
+﻿using Application.DTOs;
+using Application.Features.Departments.Commands.CreateDepartmentCommand;
 using AutoMapper;
 using Domain.Entities;
 
@@ -10,6 +11,10 @@ namespace Application.Mappings
         {
             #region
             CreateMap<CreateDepartmentCommand, Department>();
+            #endregion
+
+            #region DTOs
+            CreateMap<Department, DepartmentDTO>();
             #endregion
         }
     }

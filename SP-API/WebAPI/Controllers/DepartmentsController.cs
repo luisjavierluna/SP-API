@@ -1,7 +1,9 @@
 ﻿using Application.Features.Departments.Commands.CreateDepartmentCommand;
 using Application.Features.Departments.Commands.DeleteDepartmentCommand;
+using Application.Features.Departments.Commands.GetDepartmentById;
 using Application.Features.Departments.Commands.UpdateDepartmentCommand;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace WebAPI.Controllers
 {
@@ -9,6 +11,12 @@ namespace WebAPI.Controllers
     [ApiController]
     public class DepartmentsController : BaseApiController
     {
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            return Ok(await Mediator.Send(new GetDepartmentByIdQuery() { Id = id }));
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post(CreateDepartmentCommand command)
         {
