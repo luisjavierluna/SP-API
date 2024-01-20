@@ -1,8 +1,8 @@
 using Application;
-using Identity.Models;
-using Identity.Seeds;
+using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Persistence;
+using Persistence.Seeds;
 using Shared;
 using WebAPI.Extensions;
 
