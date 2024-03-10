@@ -3,6 +3,7 @@ using Application.Features.Departments.Commands.DeleteDepartmentCommand;
 using Application.Features.Departments.Commands.GetallDepartments;
 using Application.Features.Departments.Commands.GetDepartmentById;
 using Application.Features.Departments.Commands.UpdateDepartmentCommand;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -22,6 +23,8 @@ namespace WebAPI.Controllers
             }));
         }
 
+        [Authorize(Roles = "Admin")]
+        // [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {

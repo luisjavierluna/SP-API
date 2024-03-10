@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddWebApi();
 builder.Services.AddApplicationLayer();
 builder.Services.AddPersistenceInfraestructure(builder.Configuration);
 builder.Services.AddSharedInfraestructure(builder.Configuration);
@@ -28,6 +29,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
