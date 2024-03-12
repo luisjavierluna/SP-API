@@ -1,0 +1,36 @@
+<div class="container">
+    <h4>Departamentos</h4>
+    
+    <br>
+
+    <div class="row d-flex justify-content-end">
+        <button type="button" class="btn btn-success col-3 ">Crear Departamento</button>
+    </div>
+
+    <br>
+    <br>
+    
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let department of departments;let i = index">
+            <th scope="row">{{i + 1}}</th>
+            <td>{{department.name}}</td>
+            <td>{{department.description.slice(0, 150)}}...</td>
+            <td>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="button">Actualizar</button>
+                    <button class="btn btn-danger" type="button">Eliminar</button>
+                </div>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+</div>
