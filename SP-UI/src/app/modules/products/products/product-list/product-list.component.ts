@@ -1,45 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { departmentDTO } from 'src/app/core/interfaces/departmentDTO';
+import { DepartmentsService } from '../../services/departments.service';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit {
 
+  constructor(private departmentsService: DepartmentsService) {}
+  departments: departmentDTO[] = []
+  
+  ngOnInit(): void {
+    this.getAll()
+  }
 
-  departments = [
-    {
-      name: 'Humana',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae voluptatem veritatis corrupti tempore autem officia animi maxime atque corporis odit porro omnis eaque facilis eius consequatur delectus magni, fugiat repellendus.'
-    },
-    {
-      name: 'Humana',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae voluptatem veritatis corrupti tempore autem officia animi maxime atque corporis odit porro omnis eaque facilis eius consequatur delectus magni, fugiat repellendus.'
-    },
-    {
-      name: 'Humana',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae voluptatem veritatis corrupti tempore autem officia animi maxime atque corporis odit porro omnis eaque facilis eius consequatur delectus magni, fugiat repellendus.'
-    },
-    {
-      name: 'Humana',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae voluptatem veritatis corrupti tempore autem officia animi maxime atque corporis odit porro omnis eaque facilis eius consequatur delectus magni, fugiat repellendus.'
-    },
-    {
-      name: 'Humana',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae voluptatem veritatis corrupti tempore autem officia animi maxime atque corporis odit porro omnis eaque facilis eius consequatur delectus magni, fugiat repellendus.'
-    },
-    {
-      name: 'Humana',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae voluptatem veritatis corrupti tempore autem officia animi maxime atque corporis odit porro omnis eaque facilis eius consequatur delectus magni, fugiat repellendus.'
-    },
-    {
-      name: 'Humana',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae voluptatem veritatis corrupti tempore autem officia animi maxime atque corporis odit porro omnis eaque facilis eius consequatur delectus magni, fugiat repellendus.'
-    },
-    {
-      name: 'Humana',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae voluptatem veritatis corrupti tempore autem officia animi maxime atque corporis odit porro omnis eaque facilis eius consequatur delectus magni, fugiat repellendus.'
-    },
-  ]
+  getAll() {
+    this.departmentsService.getAll()
+    .subscribe({
+      next: departments => this.departments = departments,
+      error: error => console.log(error)
+    })
+  }
+  
 }

@@ -33,7 +33,7 @@ namespace Application.Features.Departments.Commands.GetallDepartments
             public async Task<PagedResponse<List<DepartmentDTO>>> Handle(GetallDepartmentsQuery request, CancellationToken cancellationToken)
             {
                 var departments = await _repositoryAsync.ListAsync(
-                    new PagedDepartmentsSpecification(request.PageNumber, request.PageSize, request.Name));
+                    new PagedDepartmentsSpecification(request.PageNumber, request.PageSize));
 
                 var departmentsDto = _mapper.Map<List<DepartmentDTO>>(departments);
 

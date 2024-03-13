@@ -17,7 +17,7 @@ namespace WebAPI.Controllers
         {
             return Ok(await Mediator.Send(new GetallDepartmentsQuery()
             {
-                Name = filter.Name,
+                // Name = filter.Name,
                 PageNumber = filter.PageNumber,
                 PageSize = filter.PageSize
             }));
