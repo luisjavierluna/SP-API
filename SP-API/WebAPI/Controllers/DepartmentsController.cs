@@ -2,6 +2,7 @@
 using Application.Features.Departments.Commands.DeleteDepartmentCommand;
 using Application.Features.Departments.Commands.GetallDepartments;
 using Application.Features.Departments.Commands.GetDepartmentById;
+using Application.Features.Departments.Commands.GetDepartmentsAmount;
 using Application.Features.Departments.Commands.UpdateDepartmentCommand;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +22,12 @@ namespace WebAPI.Controllers
                 PageNumber = filter.PageNumber,
                 PageSize = filter.PageSize
             }));
+        }
+
+        [HttpGet("amount")]
+        public async Task<IActionResult> GetRecordsAmount()
+        {
+            return Ok(await Mediator.Send(new GetDepartmentsAmountQuery()));
         }
 
         [Authorize(Roles = "Admin")]

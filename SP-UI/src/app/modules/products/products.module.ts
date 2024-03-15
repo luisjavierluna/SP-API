@@ -2,13 +2,13 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
-import { ProductListComponent } from './products/product-list/product-list.component';
+import { DepartmentListComponent } from './departments/department-list/department-list.component';
 
 
 
 @NgModule({
   declarations: [
-    ProductListComponent
+    DepartmentListComponent
   ],
   imports: [
     CommonModule,

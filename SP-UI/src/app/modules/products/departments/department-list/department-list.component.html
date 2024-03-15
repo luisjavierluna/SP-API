@@ -1,0 +1,78 @@
+<div class="container">
+    <h4>Departamentos</h4>
+    
+    <br>
+
+    <div class="row d-flex justify-content-end">
+        <button type="button" class="btn btn-success col-3 ">Crear Departamento</button>
+    </div>
+
+    <br>
+    <br>
+
+    <!-- Select number of records per page -->
+    <div class="mb-4">
+      <select class="form-select" aria-label="Default select example" (change)="changePageSize($event)">
+        <option selected disabled>-- Cantidad de registros a mostrar --</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+    </div>
+
+
+    <!-- Table -->
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let department of departments;let i = index">
+            <th scope="row">{{i + 1}}</th>
+            <td>{{department.name}}</td>
+            <td>{{department.description.slice(0, 150)}}...</td>
+            <td>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="button">Actualizar</button>
+                    <button class="btn btn-danger" type="button">Eliminar</button>
+                </div>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Pagination -->
+<div class="container mt-5">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+  
+      <li role="button" class="page-item disabled"
+        [class.disabled]="pagination.isFirstPage"
+        >
+        <a class="page-link" (click)="selectPage(pagination.pageNumber - 1)" >&laquo;</a>
+      </li>
+      
+      <li role="button" *ngFor="let _ of [].constructor(pagination.totalNumberPages); let i = index" 
+        class="page-item"
+        [class.active]="i === pagination.pageNumber - 1"
+        >
+        <a class="page-link" (click)="selectPage(i + 1)">{{ i + 1 }}</a>
+      </li>
+      
+      <li role="button" class="page-item"
+        [class.disabled]="pagination.isLastPage"
+        >
+        <a class="page-link" (click)="selectPage(pagination.pageNumber + 1)">&raquo;</a>
+      </li>
+        
+    </ul>
+  </nav>
+</div>

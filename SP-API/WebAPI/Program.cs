@@ -2,8 +2,10 @@ using Application;
 using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Persistence;
+using Persistence.Context;
 using Persistence.Seeds;
 using Shared;
+using System;
 using WebAPI.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -66,8 +68,10 @@ async Task SeedUsers()
     using var scope = app.Services.CreateScope();
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
     await DefaultRoles.SeedAsync(userManager, roleManager);
     await DefaultAdminUser.SeedAsync(userManager, roleManager);
     await DefaultBasicUser.SeedAsync(userManager, roleManager);
+    await DefaultDepartments.SeedAsync(context);
 }

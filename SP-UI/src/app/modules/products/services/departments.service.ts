@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map, of } from 'rxjs';
+import { Observable, map, of, skip, take } from 'rxjs';
 import { departmentDTO } from 'src/app/core/interfaces/departmentDTO';
 import { response } from 'src/app/core/interfaces/response';
 import { environment } from 'src/environments/environments';
@@ -12,44 +12,15 @@ export class DepartmentsService {
 
   constructor(private http: HttpClient) { }
 
-  departments: departmentDTO[] = [
-    {
-      name: 'Humana',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae voluptatem veritatis corrupti tempore autem officia animi maxime atque corporis odit porro omnis eaque facilis eius consequatur delectus magni, fugiat repellendus.'
-    },
-    {
-      name: 'Humana',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae voluptatem veritatis corrupti tempore autem officia animi maxime atque corporis odit porro omnis eaque facilis eius consequatur delectus magni, fugiat repellendus.'
-    },
-    {
-      name: 'Humana',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae voluptatem veritatis corrupti tempore autem officia animi maxime atque corporis odit porro omnis eaque facilis eius consequatur delectus magni, fugiat repellendus.'
-    },
-    {
-      name: 'Humana',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae voluptatem veritatis corrupti tempore autem officia animi maxime atque corporis odit porro omnis eaque facilis eius consequatur delectus magni, fugiat repellendus.'
-    },
-    {
-      name: 'Humana',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae voluptatem veritatis corrupti tempore autem officia animi maxime atque corporis odit porro omnis eaque facilis eius consequatur delectus magni, fugiat repellendus.'
-    },
-    {
-      name: 'Humana',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae voluptatem veritatis corrupti tempore autem officia animi maxime atque corporis odit porro omnis eaque facilis eius consequatur delectus magni, fugiat repellendus.'
-    },
-    {
-      name: 'Humana',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae voluptatem veritatis corrupti tempore autem officia animi maxime atque corporis odit porro omnis eaque facilis eius consequatur delectus magni, fugiat repellendus.'
-    },
-    {
-      name: 'Humana',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae voluptatem veritatis corrupti tempore autem officia animi maxime atque corporis odit porro omnis eaque facilis eius consequatur delectus magni, fugiat repellendus.'
-    },
-  ]
-
   private apiUrl = environment.apiURL + 'Departments'
 
-  public getAll(pageNumber: number = 1, pageSize: number = 50):Observable<departmentDTO[]> {
+  public getAmount():Observable<number>{
+    return this.http.get<response>(`${this.apiUrl}/amount`).pipe(
+      map(response => response.data)
+    )
+  }
+
+  public getPaginated(pageNumber: number, pageSize: number):Observable<departmentDTO[]> {
     
     let params = new HttpParams();
     params = params.append('pageNumber', pageNumber.toString())
@@ -58,7 +29,5 @@ export class DepartmentsService {
     return this.http.get<response>(this.apiUrl, {params}).pipe(
       map(response => response.data)
     )
-    
-    // return of(this.departments)
   }
 }
