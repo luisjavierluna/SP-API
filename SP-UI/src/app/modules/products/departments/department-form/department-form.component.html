@@ -1,0 +1,18 @@
+<div *ngIf="successResponse" class="alert alert-success" role="alert">
+    El departamento se registro exitosamente
+</div>
+
+<form [formGroup]="form" (ngSubmit)="save()">
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input formControlName="name" type="text" class="form-control" placeholder="Escribe el nombre del departamento">
+        <small class="text-danger fw-bolder">{{getNameErrorMessage('name')}}</small>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Descripción</label>
+        <textarea formControlName="description" class="form-control" rows="3" placeholder="Escribe una descripción para el departamento"></textarea>
+        <small class="text-danger fw-bolder">{{getDescriptionErrorMessage('description')}}</small>
+    </div>
+    
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Guardar</button>
+</form>

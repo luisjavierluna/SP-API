@@ -30,4 +30,10 @@ export class DepartmentsService {
       map(response => response.data)
     )
   }
+
+  public create(department: departmentDTO):Observable<boolean> {
+    return this.http.post<response>(this.apiUrl, department).pipe(
+      map(response => response.succeeded)
+    )
+  }
 }

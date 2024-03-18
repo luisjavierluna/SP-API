@@ -1,18 +1,14 @@
 <div class="container">
     <h4>Departamentos</h4>
     
-    <br>
-
-    <div class="row d-flex justify-content-end">
-        <button type="button" class="btn btn-success col-3 ">Crear Departamento</button>
+    <!-- Button trigger modal -->
+    <div class="row d-flex justify-content-end mt-4">
+        <button type="button" class="btn btn-success col-3" data-bs-toggle="modal" data-bs-target="#createDepartmentModal">Crear Departamento</button>
     </div>
 
-    <br>
-    <br>
-
     <!-- Select number of records per page -->
-    <div class="mb-4">
-      <select class="form-select" aria-label="Default select example" (change)="changePageSize($event)">
+    <div class="mt-4">
+      <select class="form-select" aria-label="Default select" (change)="changePageSize($event)">
         <option selected disabled>-- Cantidad de registros a mostrar --</option>
         <option value="5">5</option>
         <option value="10">10</option>
@@ -22,9 +18,8 @@
       </select>
     </div>
 
-
     <!-- Table -->
-    <table class="table">
+    <table class="table mt-4">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -47,32 +42,50 @@
           </tr>
         </tbody>
     </table>
+    
+    <!-- Pagination -->
+    <div *ngIf="totalNumberRecords >= 0" class="container mt-4">
+      <nav aria-label="Page navigation">
+        <ul class="pagination">
+      
+          <li role="button" class="page-item disabled"
+            [class.disabled]="pagination.isFirstPage"
+            >
+            <a class="page-link" (click)="selectPage(pagination.pageNumber - 1)" >&laquo;</a>
+          </li>
+          
+          <li role="button" *ngFor="let _ of [].constructor(pagination.totalNumberPages); let i = index" 
+            class="page-item"
+            [class.active]="i === pagination.pageNumber - 1"
+            >
+            <a class="page-link" (click)="selectPage(i + 1)">{{ i + 1 }}</a>
+          </li>
+          
+          <li role="button" class="page-item"
+            [class.disabled]="pagination.isLastPage"
+            >
+            <a class="page-link" (click)="selectPage(pagination.pageNumber + 1)">&raquo;</a>
+          </li>
+            
+        </ul>
+      </nav>
+    </div>
 </div>
 
-<!-- Pagination -->
-<div class="container mt-5">
-  <nav aria-label="Page navigation example">
-    <ul class="pagination">
-  
-      <li role="button" class="page-item disabled"
-        [class.disabled]="pagination.isFirstPage"
-        >
-        <a class="page-link" (click)="selectPage(pagination.pageNumber - 1)" >&laquo;</a>
-      </li>
-      
-      <li role="button" *ngFor="let _ of [].constructor(pagination.totalNumberPages); let i = index" 
-        class="page-item"
-        [class.active]="i === pagination.pageNumber - 1"
-        >
-        <a class="page-link" (click)="selectPage(i + 1)">{{ i + 1 }}</a>
-      </li>
-      
-      <li role="button" class="page-item"
-        [class.disabled]="pagination.isLastPage"
-        >
-        <a class="page-link" (click)="selectPage(pagination.pageNumber + 1)">&raquo;</a>
-      </li>
-        
-    </ul>
-  </nav>
+<!-- Modal Create Department -->
+<div class="modal fade" id="createDepartmentModal" tabindex="-1" aria-labelledby="createDepartmentTitleLable" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="createDepartmentTitleLable">Crear Nuevo Departamento</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-department-form></app-department-form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
