@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { departmentDTO } from 'src/app/core/interfaces/departmentDTO';
 import { DepartmentsService } from '../../services/departments.service';
@@ -11,12 +11,13 @@ import { DepartmentsService } from '../../services/departments.service';
 export class DepartmentFormComponent {
 
   constructor(
-    private formBuilder: FormBuilder,
-    private departmentService: DepartmentsService) {}
+    private formBuilder: FormBuilder) {}
+
+  @Output()
+  onSubmit: EventEmitter<departmentDTO> = new EventEmitter<departmentDTO>()
 
   nameMinLength: number = 5
   descriptionMinLength: number = 50
-  successResponse!: boolean
 
   form: FormGroup = this.formBuilder.group({
     name: [
@@ -39,25 +40,9 @@ export class DepartmentFormComponent {
     ]
   })
 
-  // Save Department
-  save(){
-    let newDepartment: departmentDTO = this.form.value
-    
-    this.departmentService.create(newDepartment)
-      .subscribe({
-        next: response => {
-          this.successResponse = response
-          this.reloadPage()
-        },
-        error: error => console.log(error)
-      })
-  }
-
-  // Refresh current page
-  reloadPage(){
-    setTimeout(() => {
-      window.location.reload()
-    }, 1500);
+  // Submit Department
+  submitChanges() {
+    this.onSubmit.emit(this.form.value)
   }
 
   // Validate Name Field

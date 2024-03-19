@@ -1,8 +1,4 @@
-<div *ngIf="successResponse" class="alert alert-success" role="alert">
-    El departamento se registro exitosamente
-</div>
-
-<form [formGroup]="form" (ngSubmit)="save()">
+<form [formGroup]="form" (ngSubmit)="submitChanges()">
     <div class="mb-3">
         <label class="form-label">Nombre</label>
         <input formControlName="name" type="text" class="form-control" placeholder="Escribe el nombre del departamento">

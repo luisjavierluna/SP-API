@@ -1,0 +1,7 @@
+<div *ngIf="successResponse" class="alert alert-success" role="alert">
+    El departamento se registro exitosamente
+</div>
+
+<div class="container">
+    <app-department-form (onSubmit)="create($event)"></app-department-form>
+</div>

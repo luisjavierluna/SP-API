@@ -5,13 +5,15 @@ import { NgModule } from '@angular/core';
 
 import { DepartmentListComponent } from './departments/department-list/department-list.component';
 import { DepartmentFormComponent } from './departments/department-form/department-form.component';
+import { CreateDepartmentComponent } from './departments/create-department/create-department.component';
 
 
 
 @NgModule({
   declarations: [
     DepartmentListComponent,
-    DepartmentFormComponent
+    DepartmentFormComponent,
+    CreateDepartmentComponent
   ],
   imports: [
     CommonModule,
