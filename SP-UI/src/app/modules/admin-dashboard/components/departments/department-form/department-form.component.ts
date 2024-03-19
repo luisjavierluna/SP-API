@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { departmentDTO } from 'src/app/core/interfaces/departmentDTO';
-import { DepartmentsService } from '../../services/departments.service';
 
 @Component({
   selector: 'app-department-form',

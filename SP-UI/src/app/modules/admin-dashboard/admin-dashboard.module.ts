@@ -3,9 +3,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
-import { DepartmentListComponent } from './departments/department-list/department-list.component';
-import { DepartmentFormComponent } from './departments/department-form/department-form.component';
-import { CreateDepartmentComponent } from './departments/create-department/create-department.component';
+import { DepartmentListComponent } from './pages/department-list/department-list.component';
+import { DepartmentFormComponent } from './components/departments/department-form/department-form.component';
+import { CreateDepartmentComponent } from './components/departments/create-department/create-department.component';
 
 
 
@@ -21,4 +21,4 @@ import { CreateDepartmentComponent } from './departments/create-department/creat
     ReactiveFormsModule
   ]
 })
-export class ProductsModule { }
+export class AdminDashboardModule { }

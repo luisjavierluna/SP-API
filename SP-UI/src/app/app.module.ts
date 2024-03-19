@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProductsModule } from './modules/products/products.module';
+import { AdminDashboardModule } from './modules/admin-dashboard/admin-dashboard.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +12,7 @@ import { ProductsModule } from './modules/products/products.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ProductsModule
+    AdminDashboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

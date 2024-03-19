@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { departmentDTO } from 'src/app/core/interfaces/departmentDTO';
-import { DepartmentsService } from '../../services/departments.service';
+import { DepartmentsService } from '../../../services/departments.service';
 
 @Component({
   selector: 'app-create-department',
